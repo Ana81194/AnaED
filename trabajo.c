@@ -20,21 +20,21 @@ int opcion;
 srand(time(NULL));
 
 do {
-opcion = menu();
-switch (opcion) {
-case 1:
-creardato(&ptr);
-break;
-case 2:
-mostrarDatos(ptr);
-break;
-case 3:
-liberardato(&ptr);
-break;
-case 4:
-break;
-default:
-printf("no valido \n");
+    opcion = menu();
+        switch (opcion) {
+    case 1:
+        creardato(&ptr);
+    break;
+    case 2:
+        mostrarDatos(ptr);
+    break;
+    case 3:
+        liberardato(&ptr);
+    break;
+    case 4:
+    break;
+    default:
+        printf("no valido \n");
 }
 } while (opcion != 4);
 
@@ -53,10 +53,10 @@ return opcion;
 }
 
 void creardato(struct dato **ptr) {
-     struct Dato *nuevo;
-    nuevo = (struct Dato *)malloc(sizeof(struct Dato));
+     struct Dato *ptrtemp;
+    ptrtemp = (struct Dato *)malloc(sizeof(struct Dato));
 
-    if(nuevo == NULL){
+    if(ptrtemp == NULL){
         printf("Error de memoria\n");
         return;
     }
