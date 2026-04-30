@@ -8,17 +8,19 @@ struct Dato{
 int menu(void){
     int opcion;
     printf("1.- Crear dato\n");
-    printf("2.- Mostrar dato\n");
+    printf("2.- funciones\n");
     printf("3.- Liberar ultimo dato\n");
-    printf("4.- Liberar TODOS los datos\n"); // NUEVA OPCION EN CLASE
+    printf("4.- Liberar TODOS los datos \n"); // NUEVA OPCION EN CLASE
     printf("5.- Salir\n");
     printf("Ingrese una opcion: ");
     scanf("%d", &opcion);
     return opcion;
 }
+//prototipos 
 struct Dato* crearDato(void);
 void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
+void liberarTodo(struct Dato **ptr); //llamarlo diferente de liberar dato sino el codigo no sabra cual de los dos es 
 
 int main (void){
 	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL;
@@ -35,11 +37,11 @@ do{
                 if(ptr == NULL){
                     ptr = ptrTemp;
                 } else {
-                    ptrAux = ptr; // Se crea un apuntador auxiliar para recorrer la lista enlazada
-                    while(ptrAux->ptrSig != NULL){// Se recorre la lista enlazada hasta llegar al último nodo, el cual apunta a NULL
-                        ptrAux = ptrAux->ptrSig; // Se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al último nodo de la lista enlazada
+                    ptrAux = ptr; // aqui se crea un apuntador auxiliar para recorrer la lista enlazada
+                    while(ptrAux->ptrSig != NULL){// esta parte recorre la lista enlazada hasta llegar al último nodo, el cual apunta a NULL
+                        ptrAux = ptrAux->ptrSig; // despues se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al último nodo de la lista enlazada
                     }
-                    ptrAux->ptrSig = ptrTemp;// Se enlaza el nuevo nodo al final de la lista enlazada, haciendo que el último nodo apunte al nuevo nodo creado
+                    ptrAux->ptrSig = ptrTemp;// aqui se  enlaza el nuevo nodo al final de la lista enlazada, haciendo que el último nodo apunte al nuevo nodo creado
                 }
             }
             break;
@@ -85,7 +87,7 @@ struct Dato * crearDato(void){
 	}
 }
 
-void mostrarDato(struct Dato *ptr){
+void funciones(struct Dato *ptr){
 	// Mostrar dato
 	while(ptr != NULL){
 		printf("%d\n", ptr->d); 
@@ -115,6 +117,8 @@ void liberarDato(struct Dato **ptr){
 		}
 	}
 }
+ //CLASE DE 28 DE ABRIL DEL 2026 
+ // Ccodigo para eliminar todos los datos 
 void liberarTodo(struct Dato **ptr){
     struct Dato *ptrAux;
 
