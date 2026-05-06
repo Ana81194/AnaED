@@ -14,10 +14,10 @@ struct Dato* crearDato(void);
 void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
 void liberarTodo(struct Dato **ptr);
-void buscardato(struct Dato *ptr);
+void buscarDato(struct Dato *ptr);
 void contardato(struct Dato **ptr);
 void remplazarDato(struct Dato **ptr);
-void ordenarDato(struct Dato **ptr);
+void ordenarnodo(struct Dato **ptr);
 
 //meun principal 
 int menu(void){
@@ -85,7 +85,7 @@ int main(void){
                     switch(subopcion){
 
                         case 1:
-                            buscarDato(ptr);
+                            buscarDato(&ptr);
                             break;
 
                         case 2:
@@ -93,7 +93,7 @@ int main(void){
                             break;
 
                         case 3:
-                            contarnodo(&ptr);
+                            ordenarnodo(&ptr);
                             break;
 
                         case 4:
@@ -207,7 +207,7 @@ void buscarDato(struct Dato *ptr){
     int valor, encontrado = 0 // esta en una bandera e inica en cero 
 
     printf("Ingrese el dato a buscar: ");
-    scanf("%d", &valor);
+    scanf("%d",&valor);
 
     while(ptr != NULL){ }// aqui se recorre la lista el siclo sigue no importa que tenga nodos 
 
@@ -219,7 +219,7 @@ void buscarDato(struct Dato *ptr){
         ptr = ptr->ptrSig; // este es para avanzar al sigiente nodos 
     }
 
-    if(encontrado == 0){
+    if (encontrado == 0){
         printf("Dato no encontrado.\n");
     }
 
@@ -243,6 +243,41 @@ void remplazarDato(struct Dato **ptr){
         aux = aux->ptrSig; // avanzamos al siguiente nodo 
     }
 
-    printf("Dato no encontrado.\n");
+    printf("Dato no encontrado\n");
 
 
+void ordenarnodo(struct Dato **ptr){
+
+    *ptr, *ptraux, *ptrant, *ptrtemp;
+    int cambio; //bandera 
+
+    if(*ptr ==NULL || (*ptr)-> ptrsig = NULL) 
+    
+    do
+    {
+        cambio = 0; // bandera se inicializa en cero 
+        ptraux= *cab;
+        ptrant =NULL;
+
+        while(ptraux -> ptrsig !=NULL)
+        {
+            if (ptraux->dato->ptraux->ptrsig->dato)
+            {
+                ptrtemp = ptraux->ptrsig;
+                ptraux->ptrsig=ptrtemp->ptrsig;
+                ptrtemp->ptrsig=ptraux;
+
+                if(ptrant==NULL)
+                *ptr =ptrtemp;
+                else 
+                    ptrant->ptrsig=ptrtemp;
+
+                    ptrant=ptrtemp;
+                    cambio=1; 
+            }
+            else
+        }
+            ptrant = ptraux;
+            ptraux = ptraux->ptrsig;
+    } while (cambio);
+}
