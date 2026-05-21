@@ -1,102 +1,48 @@
 #include <stdio.h>
-#include <stdlib.h>
-
 struct arbol{
     int dato;
-    struct arbol *izq;
-    struct arbol *der;
-};
-
-int menu();
-struct arbol* crearnodo();
-struct arbol* insertar(struct arbol *raiz, struct arbol *nuevo);
-
+    struct arbol *izq , *der;
+    raiz=NULL;
+}
 int menu() {
     int opcion;
-
-    printf("\nMENU\n");
-    printf("1.- Insertar\n");
-    printf("2.- Salir\n");
-    printf("Opcion: ");
+    printf("\nMenú\n");
+    printf("1.- insertar\n");
+    printf("2.- salir\n");
     scanf("%d", &opcion);
-
     return opcion;
 }
 
-struct arbol* crearnodo(){
-
-    struct arbol *nuevo;
-
-    nuevo = (struct arbol*)malloc(sizeof(struct arbol));
-
-    if(nuevo != NULL){
-
-        printf("Ingresa el dato: ");
-        scanf("%d", &nuevo->dato);
-
-        nuevo->izq = NULL;
-        nuevo->der = NULL;
-    }
-
-    return nuevo;
-}
-struct arbol* insertar(struct arbol *raiz, struct arbol *nuevo){
-
-    if(raiz == NULL){
-        return nuevo;
-    }
-
-    if(nuevo->dato < raiz->dato){
-        raiz->izq = insertar(raiz->izq, nuevo);
-    }
-    else if(nuevo->dato > raiz->dato){
-        raiz->der = insertar(raiz->der, nuevo);
-    }
-
-    return raiz;
-}
-
-int main(){
-
-    int opcion;
-
-    struct arbol *raiz = NULL;
-    struct arbol *ptrtemp;
-
-    do{
-
+int main(void){
+    struct *raiz;
+    do {
         opcion = menu();
-
-        switch(opcion){
-
+        switch (opcion) {
             case 1:
-
-                ptrtemp = crearnodo();
-
-                if(ptrtemp == NULL){
-
-                    printf("No se pudo crear el nodo\n");
-
-                }else{
-
-                    raiz = insertar(raiz, ptrtemp);
-
-                    printf("Nodo insertado correctamente\n");
+            ptrtemp= crearnodo();
+            if(ptrtemp=NULL){
+                printf("no se pudo crear el nodo\n");
+            }else{
+                printf("el nodo fue creado exitosamente\n");
+                if(raiz==NULL)
+                    raiz= ptrtemp;
+            }
+                while{
+                    if(nuevo->dato < raiz->dato){
+                    raiz->izq = insertar(raiz->izq, nuevo);
                 }
+                     else if(nuevo->dato > raiz->dato){
+                        raiz->der = insertar(raiz->der, nuevo);
+                     }
 
+                     return raiz;
+                }
                 break;
-
             case 2:
-
-                printf("Saliendo...\n");
+                salir
                 break;
-
-            default:
-
-                printf("Opcion invalida\n");
         }
-
-    }while(opcion != 2);
+    } while (opcion != 2);
 
     return 0;
-}
+}  este es mi codigo 
