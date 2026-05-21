@@ -1,81 +1,98 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-struct dato {
-int d;
-struct dato *ptrsig;
+struct Dato{
+	int d;
+	struct Dato *ptrSig;
 };
 
-// Prototipos
-int menu();
-void creardato(struct dato **ptr);
-void mostrarDatos(struct dato *ptr);
-void liberardato(struct dato **ptr);
-
-int main(void) {
-struct dato *ptr = NULL;
-int opcion;
-
-srand(time(NULL));
-
-do {
-    opcion = menu();
-        switch (opcion) {
-    case 1:
-        creardato(&ptr);
-    break;
-    case 2:
-        mostrarDatos(ptr);
-    break;
-    case 3:
-        liberardato(&ptr);
-    break;
-    case 4:
-    break;
-    default:
-        printf("no valido \n");
-}
-} while (opcion != 4);
-
-return 0;
+int menu(void){
+	int opcion;
+	printf("1.- Crear dato\n");
+	printf("2.- Mostrar dato\n");
+	printf("3.- Liberar dato\n");
+	printf("4.- Salir\n");
+	printf("Ingrese una opcion: ");
+	scanf("%d", &opcion);
+	return opcion;
 }
 
-int menu() {
-int opcion;
-printf("\nMenu\n");
-printf("1.- Crear dato\n");
-printf("2.- Mostrar datos\n");
-printf("3.- Liberar\n");
-printf("4.- Salir\n");
-scanf("%d", &opcion);
-return opcion;
+struct Dato* crearDato(void);
+void mostrarDato(struct Dato *ptr);
+void liberarDato(struct Dato **ptr);
+
+int main (void){
+	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL;
+	int opcion;
+    do{
+		opcion = menu();
+		switch(opcion){
+			case 1:
+				ptrTemp = crearDato();
+				if(ptrTemp == NULL){
+					printf("No se pudo crear el dato.\n");
+				} else {
+					printf("Dato creado exitosamente.\n");
+					if(ptr == NULL){
+						ptr = ptrTemp;
+					} else {
+						ptrAux = ptr;
+						while(ptrAux->ptrSig != NULL){ 
+							ptrAux = ptrAux->ptrSig; 
+						}
+						ptrAux->ptrSig = ptrTemp; 
+					}
+				}
+				break;
+			case 2:
+				// Mostrar dato
+				break;
+			case 3:
+				liberarDato(&ptr);
+				 	
+				break;
+			case 4:
+				// Salir
+				break;
+			default:
+				printf("Opcion invalida\n");
+		}
+	} while(opcion != 4);
+
 }
 
-void creardato(struct dato **ptr) {
-     struct Dato *ptrtemp;
-    ptrtemp = (struct Dato *)malloc(sizeof(struct Dato));
+struct Dato * crearDato(void){
 
-    if(ptrtemp == NULL){
-        printf("Error de memoria\n");
-        return;
-    }
-
-    printf("Ingrese un valor entero: ");
-    scanf("%d", &nuevo->d);
-
-    nuevo->ptrSig = *ptr; // Insertar al inicio
-    *ptr = nuevo;
-
-    printf("Dato creado correctamente\n");
+    struct Dato *ptrTemp; 
+	ptrTemp = (struct Dato *)malloc(sizeof(struct Dato)); 
+	if(ptrTemp == NULL){
+		printf("Error al asignar memoria.\n");
+		return NULL;
+	} else {
+		printf("Ingrese un entero: ");
+		scanf("%d", &ptrTemp->d);
+		ptrTemp->ptrSig = NULL; 
+		return ptrTemp; 
+	}
 }
 
-
-
-void mostrarDatos(struct dato *ptr) {
+void mostrarDato(struct Dato *ptr){
 }
-
-
-void liberardato(struct dato **ptr) {
-
+void liberarDato(struct Dato **ptr){
+	struct Dato *ptrAux; 
+	if(*ptr == NULL){
+		printf("No hay datos para liberar.\n");
+	} else {
+		if((*ptr)->ptrSig == NULL){ 
+			free(*ptr); 
+			*ptr = NULL; 
+		} else {
+			ptrAux = *ptr; 
+			while(ptrAux->ptrSig != NULL){ 
+				ptrAux = ptrAux->ptrSig; 
+			}
+			free(ptrAux); 
+			*ptr = NULL;
+		}
+	}
 }
